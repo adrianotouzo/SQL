@@ -1,0 +1,25 @@
+Como a lentidão continua, vamos partir para os passos abaixo:
+
+Verifique em seu banco do TSS se existem pendencias que possa estar causando a consulta indevida.
+
+*- Faça backup de sua tabela SPED050
+*- Realize filtro em sua tabela SPED050 procurando por STATUS = 1 ou 2 ou 4
+Caso encontre algum registro, altere o campo STATUS para 5
+
+*- Realize novo filtro em sua tabela SPED050 e procure por STATUSCANC = 1
+Se encontrar registros altere o campo STATUSCANC para 3
+
+*- Realize novo filtro em sua tabela SPED050 e procure por STATUSMAIL = 1
+Se encontrar registros altere o campo STATUSMAIL para 3
+
+*- Acesse e faça um backup da tabela SPED150
+Em seguida realize filtro na tabela SPED150 procurando por STATUS = 1 ou 2 ou 4
+Se encontrar registros altere o campo STATUS para 5
+
+*- Realize novo filtro em sua tabela SPED150 e procure por STATUSMAIL = 1
+Se encontrar registros altere o campo STATUSMAIL para 3
+
+Estas alterações irão retirar todas as pendencias de seu banco de dados do TSS
+
+*- Limpar tabela TSSTR1 caso tenha registro
+*- Reiniciar o sistema Protheus e TSS por completo

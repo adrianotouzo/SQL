@@ -1,0 +1,13 @@
+--tabela de parametros
+
+SELECT * FROM SX612 WHERE X6_VAR like  '%%' OR X6_DSCSPA LIKE '%GILENO%'
+--X6_VAR = 'MV_VCHVNFE'
+
+--MV_SPEDEXC 24 horas da nota fiscal.
+
+SELECT * FROM ZZN010
+
+SELECT * FROM ZZM010
+
+SELECT * FROM SUA010
+

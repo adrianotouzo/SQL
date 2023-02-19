@@ -1,0 +1,37 @@
+SELECT B1_POSIPI ,B1_COD,B1_DESC ,B1_TE, B1_ORIGEM, B1_CLASFIS, B1_PICMENT
+	FROM SB1010 
+		WHERE D_E_L_E_T_ <> '*' AND B1_POSIPI LIKE '34022000'
+		
+/*		
+NCM 3401.20.90
+NCM 3808.94.19
+NCM 3402.20.00
+*/
+--LIKE '9608%'-- NCM GILDA.
+
+ORDER BY B1_POSIPI
+
+-- NCM SACOMAN - % ICM COMPRA E VENDA
+SELECT B1_POSIPI AS NCM ,B1_COD,B1_DESC,B1_TE AS TES_ENT,B1_TS AS TES_SAID,
+	   B1_TV AS TES_VALE,B1_TT AS TES_TRANSF,B1_TET AS TES_ENTRADA_TRANSF,B1_TD AS TES_DEVOLUÇÃO_TRANSF,
+	   B1_PICM AS ALIQ_ICM_VEN,B1_PICMENT AS SOLID_ENTRA,B1_ORIGEM,B1_CLASFIS,B1_GRTRIB,B1_CEST
+	   B1_IVA12, B1_IVA04,
+	   ZZ8_ICMSC AS ICM_COMPRA, ZZ8_ICMSV AS ICM_VENDA, B1_VENCAS
+	FROM SB1010 B1, ZZ8010 Z8
+		WHERE B1_COD = ZZ8_PROD AND B1.D_E_L_E_T_ ='' AND Z8.D_E_L_E_T_ ='' 
+				AND B1_POSIPI like '853650%'
+ORDER BY 1,2
+		
+--SELECT * FROM ZZ8010
+/*
+obs: formato do relatório:
+Cadastro do produto:
+	cod.produto - descrição - NCM - TE padrão - TS padrao - Tes vale - Tes transf - Tes ent.tran - Tes dev tran - 
+	Tes ent dev - aliq icm ven - solida ent - iva 12 - iva 4 - origem - class fiscal - grupo trib - cest
+Consulta preço:
+%icms cpra - % icms venda
+*/
+
+SELECT B1_COD,B1_DESC,B1_POSIPI,B1_IPI FROM SB1010 where D_E_L_E_T_ ='' and B1_POSIPI <>''
+
+SELECT D_E_L_E_T_,* FROM SF2010 WHERE F2_DOC = '376665'

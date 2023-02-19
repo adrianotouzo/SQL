@@ -1,0 +1,75 @@
+Favor encaminhe:
+- Print do dbmonitor
+- Print da configuração do "monitor de índice" no dbmonitor
+- Print das fontes ODBCs configuradas (Aba DSN de sistemas)
+- DBAccess.ini
+- DBConsole.log
+- DBAccess.log
+- Gere um Nettest no periodo de 1 hora da rede do cliente para o appserver e nos encaminhe o log (https://tdn.totvs.com.br/display/public/PROT/Funcionalidade+Nettest)
+- Encaminhe um print dos consumos de CPU e memória
+- Encaminhe appserver.ini do License Server Virtual
+- Encaminhe um print ou informe qual a quantidade de arquivos que possui na /system/
+- Encaminhe um print das opções de energia do servidor
+- Execute a ferramenta aMalloc em anexo  através do CMD e nos encaminhe um print do resultado
+- Encaminhe a tabela SX2
+- Encaminhe um print da tela ajuda/sobre (Shift+F6)
+- Favor execute as query abaixo e nos encaminhe o resultado das mesmas:
+
+Se MSSQL
+
+Desfragmentação de tabelas e indices:
+
+SELECT dbschemas.[name] as 'Schema',
+dbtables.[name] as 'Table',
+dbindexes.[name] as 'Index',
+indexstats.avg_fragmentation_in_percent,
+indexstats.page_count
+FROM sys.dm_db_index_physical_stats (DB_ID(), NULL, NULL, NULL, NULL) AS indexstats
+INNER JOIN sys.tables dbtables on dbtables.[object_id] = indexstats.[object_id]
+INNER JOIN sys.schemas dbschemas on dbtables.[schema_id] = dbschemas.[schema_id]
+INNER JOIN sys.indexes AS dbindexes ON dbindexes.[object_id] = indexstats.[object_id]
+AND indexstats.index_id = dbindexes.index_id
+WHERE indexstats.database_id = DB_ID()
+ORDER BY indexstats.avg_fragmentation_in_percent desc
+
+Última atualização de estatisticas:
+
+SELECT schema_name(schema_id) AS NomeSchema
+,object_name(o.object_id) AS NomeTabela
+,i.NAME AS NomeIndex
+,index_id IndexId
+,o.type Tipo
+,STATS_DATE(o.object_id, index_id) AS DataEstatistica
+FROM sys.indexes i
+JOIN sys.objects o ON i.object_id = o.object_id
+WHERE o.object_id > 100
+AND index_id > 0
+AND is_ms_shipped = 0;
+
+
+Se Oracle:
+
+Última coleta das estatísticas
+
+SELECT STAT.OWNER AS "Schema proprietário",
+         STAT.TABLE_NAME AS "Nome do objeto",
+         STAT.OBJECT_TYPE AS "Tipo do objeto",
+         STAT.NUM_ROWS AS "Quant. de Linhas",
+         STAT.LAST_ANALYZED AS "Última coleta das estatísticas"
+    FROM SYS.DBA_TAB_STATISTICS STAT
+   WHERE STAT.OWNER NOT IN ('SYS', 'SYSTEM', 'SYSMAN', 'DBSNMP')
+ORDER BY LAST_ANALYZED;
+
+SELECT STAT.OWNER AS "Schema proprietário",
+         STAT. TABLE_NAME AS "Nome do objeto",
+         STAT.OBJECT_TYPE AS "Tipo do objeto",
+         STAT.NUM_ROWS AS "Quant. de Linhas",
+         STAT.LAST_ANALYZED AS "Última coleta das estatísticas"
+    FROM SYS.DBA_IND_STATISTICS STAT
+   WHERE STAT.OWNER NOT IN ('SYS', 'SYSTEM', 'SYSMAN', 'DBSNMP')
+ORDER BY LAST_ANALYZED;
+
+
+No momento da lentidão inicie um serviço do Protheus em modo exclusivo e gere um logprofiler e um dbtrace: https://tdn.totvs.com/display/public/PROT/LogProfiler+-+Como+executar e https://tdn.totvs.com/pages/releaseview.action?pageId=274851061
+Anexo(s)
+testesMallocIO (1).rar

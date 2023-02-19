@@ -1,0 +1,25 @@
+--TABELAS DE NOTAS E LIVRO FISCAL
+/*
+SF1 - Notas de entrada
+
+SF2 -  Notas de Saida
+
+SF3 - Livros Fiscais
+
+SFT - Itens de Livros Fiscais
+
+SF2 - Cabeçalho Nota Fiscal de Saída
+
+SD2 -Itens Nota Fiscal de Saída
+
+CD2 - Livro Digital de Impostos - SPED
+*/
+SELECT D_E_L_E_T_,* FROM SF3010 WHERE F3_NFISCAL ='068788' AND F3_SERIE ='1'
+--UPDATE SF3010 SET D_E_L_E_T_ ='*' WHERE F3_NFISCAL ='068788' AND F3_SERIE ='1'
+
+SELECT D_E_L_E_T_,* FROM SFT010 WHERE FT_NFISCAL ='068788' AND FT_SERIE ='1'
+--UPDATE SFT010 SET D_E_L_E_T_ ='*' WHERE FT_NFISCAL ='068788' AND FT_SERIE ='1'
+
+SELECT * FROM CD2010  WHERE CD2_DOC ='068788' AND CD2_SERIE ='1'
+--UPDATE CD2010 SET D_E_L_E_T_ ='*'  WHERE CD2_DOC ='068788' AND CD2_SERIE ='1'
+

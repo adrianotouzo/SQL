@@ -1,0 +1,76 @@
+*** 35 - Instalacao SFA nos Netbook's ***
+
+    => Copiar OXIEAGLE para um diretório do NET
+
+    1-) Executar o Banco de Dados (SQLEXPR32_PTB.EXE)
+	Aceito -> Avançar -> Instalar -> Avançar -> Avançar  -> Avançar
+	
+		Nome: NetBook_XXX
+		Empresa: Oxi-Maq
+		
+		( ) Ocultar opções
+
+	Avançar
+
+		Marcar todos (habilitar) para instalação
+
+	Avançar
+
+		Instalação Nomeada: SQLSERVER
+
+	Avançar
+
+		( ) Personalizar para cada
+		(X) Usar a conta = Sistema Local 
+		( ) Usar uma conta...    
+	
+		(X) SQL Server
+		(X) Navegador
+
+	Avançar
+
+		( ) Modo Auternativo
+		(X) Modo Misto
+
+		Senha: @!sa@!
+
+	Avançar
+
+		( ) Desagrupar ...
+		(X) Agrupamento ...
+
+	Avançar
+
+		( ) Habilitar ...
+		( ) Adicionar usuário
+
+	Avançar
+
+		( ) Envie automaticamente relatórios ...
+		( ) Envie automaticamente dados ...
+
+	Avançar -> Instalar -> Avançar -> Concluir
+
+
+    2-) Executar o arquivo (SQLSERVER2005_SSMSEE.MSI)
+	Next -> Aceitar -> Next
+
+		Nome: NetBook_XXX
+		Empresa: Oxi-Maq
+
+	Next
+
+		Marcar todos (habilitar) para instalação
+
+	Next -> Install -> Finish
+
+
+    3-) Executar o prgrama (SQL SERVER MANAGEMENT STUDIO EXPRESS)
+
+	ServerName: <nome-completo) NetBook_XXX\SQLSERVER
+	Autenticação: SQL Server Authentication
+	
+		Usuário: sa
+		Senha..: @!sa@!
+
+		Connect
